@@ -19,39 +19,38 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef SDL_config_h_
-#define SDL_config_h_
+#ifndef SDL_vitagl_c_h_
+#define SDL_vitagl_c_h_
 
-#include "SDL_platform.h"
 
-/**
- *  \file SDL_config.h
- */
+#include <pib.h>
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 
-/* Add any platform that doesn't build using the configure system. */
-#if defined(__WIN32__)
-#include "SDL_config_windows.h"
-#elif defined(__WINRT__)
-#include "SDL_config_winrt.h"
-#elif defined(__MACOSX__)
-#include "SDL_config_macosx.h"
-#elif defined(__IPHONEOS__)
-#include "SDL_config_iphoneos.h"
-#elif defined(__ANDROID__)
-#include "SDL_config_android.h"
-#elif defined(__PSP__)
-#include "SDL_config_psp.h"
-#elif defined(__OS2__)
-#include "SDL_config_os2.h"
-#elif defined(__VITA__)
-#include "SDL_config_vita.h"
-#else
-/* This is a minimal configuration just to get SDL running on new platforms. */
-#include "SDL_config_minimal.h"
-#endif /* platform config */
+#include "SDL_vitavideo.h"
 
-#ifdef USING_GENERATED_CONFIG_H
-#error Wrong SDL_config.h, check your include path?
-#endif
 
-#endif /* SDL_config_h_ */
+typedef struct SDL_GLDriverData {
+        EGLDisplay display;
+        EGLContext context;
+        EGLSurface surface;
+    uint32_t swapinterval;
+}SDL_GLDriverData;
+
+extern void * VITA_GL_GetProcAddress(_THIS, const char *proc);
+extern int VITA_GL_MakeCurrent(_THIS,SDL_Window * window, SDL_GLContext context);
+extern void VITA_GL_SwapBuffers(_THIS);
+
+extern int VITA_GL_SwapWindow(_THIS, SDL_Window * window);
+extern SDL_GLContext VITA_GL_CreateContext(_THIS, SDL_Window * window);
+
+extern int VITA_GL_LoadLibrary(_THIS, const char *path);
+extern void VITA_GL_UnloadLibrary(_THIS);
+extern int VITA_GL_SetSwapInterval(_THIS, int interval);
+extern int VITA_GL_GetSwapInterval(_THIS);
+
+
+#endif /* SDL_vitagl_c_h_ */
+
+/* vi: set ts=4 sw=4 expandtab: */
