@@ -19,7 +19,6 @@ You can still use raw gles2, though.
 ## TODO (e.g. not supported yet)
 
 * Texture render-target for gxm-based render
-* Sensors support
 * Ability to set memory pool size via SDL Hint
 * Unified build with both renders (gxm by default, piglet-gles2 via SDL Hint)
 
@@ -30,6 +29,7 @@ You can still use raw gles2, though.
 * It fully supports everything that an SDL render should (while vita2d version doesn't support blending and RenderCopyEx)
 * It also supports filesystem functions, while vita2d version doesn't
 * It is and always will be based on a fixed SDL release, not on some middle-point commit.
+* Sensors (gyro / accelerometer) support.
 
 ## Thanks
 * @xerpi for initial (vita2d) port.
