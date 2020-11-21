@@ -24,3 +24,14 @@ You can still use raw gles2, though.
 * Unified build with both renders (gxm by default, piglet-gles2 via SDL Hint)
 
 
+## Differences between this and vita2d version
+
+* First of all, it's based on a 2.0.12 instead of 2.0.8-seomething.
+* It fully supports everything that an SDL render should (while vita2d version doesn't support blending and RenderCopyEx)
+* It also supports filesystem functions, while vita2d version doesn't
+* It is and always be based on a fixed SDL release, not on some middle-point commit.
+
+## Thanks
+* @xerpi for initial (vita2d) port.
+* vitasdk/dolcesdk devs
+* CBPS discord
