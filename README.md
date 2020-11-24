@@ -29,12 +29,12 @@ Code is in vita-[sdl-release-version] branches. Master branch is intentionally k
 
 `make -f Makefile.vita.dolce install`
 
-## Limitations
+## Limitations (in gxm renderer)
 
 * Only SDL_TEXTUREFORMAT_ABGR8888 is supported.
 * Memory pool (used for vertexes) has fixed size of 2 * 1024 * 1024. That shouldn't be an issue, unless your draw count if insanely big.
 * You can bind SDL_Texture to gles2 context only when using gles2 renderer.
-* No viewport support.
+* No SDL_RenderReadPixels support.
 
 ## Differences between this and vita2d version
 
