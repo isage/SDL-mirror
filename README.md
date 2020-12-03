@@ -1,6 +1,13 @@
-# SD2-vita
+# SDL/SDL2-vita
 
-This repo contains full source for vita SDL2 port (vita-* branches).
+This repo contains full source for vita SDL1 and SDL2 ports (vita-* branches).
+
+## SDL1
+
+This port supports both doublebuffered (with SDL_Flip) and non-doublebuffered drawing.  
+It draws directly to framebuffer, without GXM (same as sdl1 works on other platforms)
+
+## SDL2
 
 There are two render backends for Vita:  
 * sceGxm-based renderer (default)
@@ -16,6 +23,7 @@ You can still use raw gles2, though.
 
 This one is incredibly slow in 2d, but you can use it if you'd like to use raw gles2 context, with ability to bind SDL_Texture
 
+
 ## Where's code?
 
 Code is in vita-[sdl-release-version] branches. Master branch is intentionally kept empty.
@@ -23,25 +31,36 @@ Code is in vita-[sdl-release-version] branches. Master branch is intentionally k
 ## Requirements
 
 * [DolceSDK](https://github.com/DolceSDK/doc) (should work with VitaSDK, but that's untested)
-* [Pigs-in-a-blanket](https://github.com/SonicMastr/Pigs-In-A-Blanket) (Included in DolceSDK)
+* (SDL2 only) [Pigs-in-a-blanket](https://github.com/SonicMastr/Pigs-In-A-Blanket) (Included in DolceSDK)
 
 ## Building
 
 `make -f Makefile.vita.dolce install`
+
+## Migrating from older SDL1-vita (vita2d one)
+* Drop links to vita2d and sceGxm
 
 ## Migrating from older SDL2-vita (vita2d one)
 * Link your app with pib instead of vita2d
 * Link with SceMotion_stub
 * Everything else should be the same. If you used vita2d_init_advanced - drop it.
 
-## Limitations (in gxm renderer)
+## SDL1 Limitations
+
+* No opengl support. Only 960x544 at 32bpp screen supported (sdl will do needed conversions anyway, though).
+
+## SDL2 Limitations (in gxm renderer)
 
 * Only SDL_TEXTUREFORMAT_ABGR8888 is supported.
 * Memory pool (used for vertexes) has fixed size of 2 * 1024 * 1024. That shouldn't be an issue, unless your draw count if insanely big.
 * You can bind SDL_Texture to gles2 context only when using gles2 renderer.
 * SDL_RenderReadPixels supports reading only from display rendertarget (no one sane should read from texture rendertarget anyway, you already has texture, god dammit).
 
-## Differences between this and vita2d version
+## SDL1 Differences between this and vita2d version
+
+* vita2d doesn't support (and can't support) non-doublebuffered drawing that many sdl1-based software uses. This port does.
+
+## SDL2 Differences between this and vita2d version
 
 * First of all, it's based on a 2.0.12 instead of 2.0.8-something.
 * It fully supports everything that an SDL render should (while vita2d version doesn't support blending modes, RenderCopyEx and texture render target)
@@ -52,4 +71,5 @@ Code is in vita-[sdl-release-version] branches. Master branch is intentionally k
 ## Thanks
 * @xerpi for initial (vita2d) port.
 * vitasdk/dolcesdk devs
-* CBPS discord
+* CBPS discord (Namely Graphene and SonicMastr)
+* Northfear for inspiration to do sdl1 port.
