@@ -1,0 +1,48 @@
+# Makefile to build the SDL library
+
+INCLUDE = -I./include
+CFLAGS  = -Wl,-q -g -O3 $(INCLUDE)
+
+CC	= arm-dolce-eabi-gcc
+AR	= arm-dolce-eabi-ar
+RANLIB	= arm-dolce-eabi-ranlib
+
+CONFIG_H = include/SDL_config.h
+TARGET  = libSDL.a
+SOURCES = \
+	src/*.c \
+	src/audio/*.c \
+	src/cdrom/*.c \
+	src/cpuinfo/*.c \
+	src/events/*.c \
+	src/file/*.c \
+	src/joystick/*.c \
+	src/stdlib/*.c \
+	src/thread/*.c \
+	src/timer/*.c \
+	src/video/*.c \
+	src/audio/vita/*.c \
+	src/video/vita/*.c \
+	src/joystick/vita/*.c \
+	src/cdrom/dummy/*.c \
+	src/thread/vita/*.c \
+	src/timer/vita/*.c \
+	src/loadso/dummy/*.c \
+
+OBJECTS = $(shell echo $(SOURCES) | sed -e 's,\.c,\.o,g')
+
+$(TARGET): $(CONFIG_H) $(OBJECTS)
+	$(AR) crv $@ $^
+	$(RANLIB) $@
+
+$(CONFIG_H):
+	cp $(CONFIG_H).default $(CONFIG_H)
+
+clean:
+	rm -f $(TARGET) $(OBJECTS)
+
+install: $(TARGET)
+	@cp  $(TARGET) $(DOLCESDK)/arm-dolce-eabi/lib
+	@mkdir -p "$(DOLCESDK)/arm-dolce-eabi/include/SDL"
+	@cp include/*.h "$(DOLCESDK)/arm-dolce-eabi/include/SDL"
+	@echo "Installed!"

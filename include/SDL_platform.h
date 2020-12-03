@@ -106,5 +106,9 @@
 #undef __WIN32__
 #define __WIN32__	1
 #endif
+#if defined(__vita__)
+#undef __VITA__
+#define __VITA__	1
+#endif
 
 #endif /* _SDL_platform_h */

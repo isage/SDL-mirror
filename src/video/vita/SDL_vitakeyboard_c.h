@@ -19,29 +19,14 @@
     Sam Lantinga
     slouken@libsdl.org
 */
+#include "SDL_config.h"
 
-#ifndef _SDL_config_h
-#define _SDL_config_h
+#ifndef _SDL_VITAKEYBOARD_H_
+#define _SDL_VITAKEYBOARD_H_
 
-#include "SDL_platform.h"
+/* Functions to be exported */
+extern void VITA_InitKeyboard();
+extern void VITA_PollKeyboard();
+extern SDL_keysym *VITA_TranslateKey(int scancode, SDL_keysym *keysym, SDL_bool pressed);
 
-/* Add any platform that doesn't build using the configure system */
-#if defined(__DREAMCAST__)
-#include "SDL_config_dreamcast.h"
-#elif defined(__MACOS__)
-#include "SDL_config_macos.h"
-#elif defined(__MACOSX__)
-#include "SDL_config_macosx.h"
-#elif defined(__SYMBIAN32__)
-#include "SDL_config_symbian.h"  /* must be before win32! */
-#elif defined(__WIN32__)
-#include "SDL_config_win32.h"
-#elif defined(__OS2__)
-#include "SDL_config_os2.h"
-#elif defined(__VITA__)
-#include "SDL_config_vita.h"
-#else
-#include "SDL_config_minimal.h"
-#endif /* platform config */
-
-#endif /* _SDL_config_h */
+#endif /* _SDL_VITAKEYBOARD_H_ */

@@ -19,29 +19,27 @@
     Sam Lantinga
     slouken@libsdl.org
 */
+#include "SDL_config.h"
 
-#ifndef _SDL_config_h
-#define _SDL_config_h
+#ifndef _SDL_vitavideo_h
+#define _SDL_vitavideo_h
 
-#include "SDL_platform.h"
+#include "../SDL_sysvideo.h"
+#include <psp2/types.h>
+#include <psp2/display.h>
+#include <psp2/kernel/sysmem.h>
 
-/* Add any platform that doesn't build using the configure system */
-#if defined(__DREAMCAST__)
-#include "SDL_config_dreamcast.h"
-#elif defined(__MACOS__)
-#include "SDL_config_macos.h"
-#elif defined(__MACOSX__)
-#include "SDL_config_macosx.h"
-#elif defined(__SYMBIAN32__)
-#include "SDL_config_symbian.h"  /* must be before win32! */
-#elif defined(__WIN32__)
-#include "SDL_config_win32.h"
-#elif defined(__OS2__)
-#include "SDL_config_os2.h"
-#elif defined(__VITA__)
-#include "SDL_config_vita.h"
-#else
-#include "SDL_config_minimal.h"
-#endif /* platform config */
+/* Hidden "this" pointer for the video functions */
+#define _THIS   SDL_VideoDevice *this
 
-#endif /* _SDL_config_h */
+#define DISPLAY_BUFFER_COUNT 2
+
+/* Private display data */
+
+struct SDL_PrivateVideoData {
+    uint8_t buffer_index;
+    SceUID buffer_uid[DISPLAY_BUFFER_COUNT];
+    void* buffer[DISPLAY_BUFFER_COUNT];
+};
+
+#endif /* _SDL_vitavideo_h */
