@@ -54,7 +54,7 @@ Code is in vita-[sdl-release-version] branches. Master branch is intentionally k
 * Only SDL_TEXTUREFORMAT_ABGR8888 is supported.
 * Memory pool (used for vertexes) has fixed size of 2 * 1024 * 1024. That shouldn't be an issue, unless your draw count if insanely big.
 * You can bind SDL_Texture to gles2 context only when using gles2 renderer.
-* SDL_RenderReadPixels supports reading only from display rendertarget (no one sane should read from texture rendertarget anyway, you already has texture, god dammit).
+* SDL_RenderReadPixels supports reading only from display rendertarget (no one sane should read from texture rendertarget anyway, you already have texture, god dammit).
 
 ## SDL1 Differences between this and vita2d version
 
@@ -69,7 +69,7 @@ Code is in vita-[sdl-release-version] branches. Master branch is intentionally k
 * Sensors (gyro / accelerometer) support.
 
 ## Thanks
-* @xerpi for initial (vita2d) port.
+* xerpi for initial (vita2d) port.
 * vitasdk/dolcesdk devs
 * CBPS discord (Namely Graphene and SonicMastr)
 * Northfear for inspiration to do sdl1 port.
