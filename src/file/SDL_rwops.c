@@ -515,6 +515,13 @@ SDL_RWops *SDL_RWFromFile(const char *file, const char *mode)
 	}
 #else
 	fp = fopen(file, mode);
+#if defined(__VITA__)
+	if (fp == NULL) {
+		char path[4096];
+		SDL_snprintf(path, 4096, "app0:/%s", file);
+		fp = fopen(file, mode);
+	}
+#endif
 #endif
 	if ( fp == NULL ) {
 		SDL_SetError("Couldn't open %s", file);
