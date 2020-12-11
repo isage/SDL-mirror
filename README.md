@@ -69,7 +69,7 @@ Code is in vita-[sdl-release-version] branches. Master branch is intentionally k
 * Sensors (gyro / accelerometer) support.
 
 ## Thanks
-* xerpi for initial (vita2d) port.
+* xerpi and rsn8887 for initial (vita2d) port
 * vitasdk/dolcesdk devs
 * CBPS discord (Namely Graphene and SonicMastr)
 * Northfear for inspiration to do sdl1 port.
