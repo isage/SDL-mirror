@@ -42,7 +42,7 @@ clean:
 	rm -f $(TARGET) $(OBJECTS)
 
 install: $(TARGET)
-	@cp  $(TARGET) $(DOLCESDK)/arm-dolce-eabi/lib
-	@mkdir -p "$(DOLCESDK)/arm-dolce-eabi/include/SDL"
-	@cp include/*.h "$(DOLCESDK)/arm-dolce-eabi/include/SDL"
+	@cp  $(TARGET) $(DESTDIR)$(DOLCESDK)/arm-dolce-eabi/lib
+	@mkdir -p "$(DESTDIR)$(DOLCESDK)/arm-dolce-eabi/include/SDL"
+	@cp include/*.h "$(DESTDIR)$(DOLCESDK)/arm-dolce-eabi/include/SDL"
 	@echo "Installed!"
