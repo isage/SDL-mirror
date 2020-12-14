@@ -40,9 +40,12 @@ $(CONFIG_H):
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+	rm $(CONFIG_H)
 
 install: $(TARGET)
 	@cp  $(TARGET) $(DESTDIR)$(DOLCESDK)/arm-dolce-eabi/lib
 	@mkdir -p "$(DESTDIR)$(DOLCESDK)/arm-dolce-eabi/include/SDL"
 	@cp include/*.h "$(DESTDIR)$(DOLCESDK)/arm-dolce-eabi/include/SDL"
 	@echo "Installed!"
+
+.PHONY: clean install $(CONFIG_H)
