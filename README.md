@@ -11,7 +11,7 @@ It draws directly to framebuffer, without GXM (same as sdl1 works on other platf
 
 There are two render backends for Vita:  
 * sceGxm-based renderer (default)
-* scePiglet-based gles2 renderer (must be chosen via hint or renderer index)
+* scePiglet-based gles2 renderer (must be chosen via hint or renderer index, DolceSDK only)
 
 ### sceGxm-based renderer
 
@@ -30,12 +30,41 @@ Code is in vita-[sdl-release-version] branches. Master branch is intentionally k
 
 ## Requirements
 
-* [DolceSDK](https://github.com/DolceSDK/doc) (should work with VitaSDK, but that's untested)
-* (SDL2 only) [Pigs-in-a-blanket](https://github.com/SonicMastr/Pigs-In-A-Blanket) (Included in DolceSDK)
+* [DolceSDK](https://github.com/DolceSDK/doc) (Or VitaSDK, but VitaSDK lacks Pigs-In-A-Blanket and thus gles2 support)
+* (SDL2 only, optional) [Pigs-in-a-blanket](https://github.com/SonicMastr/Pigs-In-A-Blanket) (Included in DolceSDK)
 
 ## Building
 
+### DolceSDK:
+
+#### CMake:
+
+```
+mkdir build
+cd build
+cmake -DCMAKE_TOOLCHAIN_FILE="${DOLCESDK}/share/dolce.toolchain.cmake" ..
+make install
+
+```
+
+#### Makefile:
 `make -f Makefile.vita.dolce install`
+
+### VITASDK:
+
+#### CMake:
+
+```
+mkdir build
+cd build
+cmake -DCMAKE_TOOLCHAIN_FILE="${VITASDK}/share/vita.toolchain.cmake" ..
+make install
+
+```
+
+#### Makefile:
+`make -f Makefile.vita.vita install`
+
 
 ## Migrating from older SDL1-vita (vita2d one)
 * Drop links to vita2d and sceGxm
