@@ -82,7 +82,7 @@ void *vita_gpu_alloc(SceKernelMemBlockType type, unsigned int size, SceUID *uid)
     return mem;
 }
 
-void gpu_free(SceUID uid)
+void vita_gpu_free(SceUID uid)
 {
     void *mem = NULL;
     if (sceKernelGetMemBlockBase(uid, &mem) < 0)
@@ -295,6 +295,9 @@ int VITA_SetColors(_THIS, int firstcolor, int ncolors, SDL_Color *colors)
 
 void VITA_VideoQuit(_THIS)
 {
+    for (int i = 0; i < DISPLAY_BUFFER_COUNT; i++) {
+        vita_gpu_free(this->hidden->buffer_uid[i]);
+    }
 }
 
 VideoBootStrap VITA_bootstrap = {
