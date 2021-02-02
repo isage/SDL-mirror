@@ -115,8 +115,8 @@ SDL_RenderDriver VITA_GXM_RenderDriver = {
             [1] = SDL_PIXELFORMAT_ARGB8888,
             [2] = SDL_PIXELFORMAT_RGB888,
             [3] = SDL_PIXELFORMAT_BGR888,
-            [2] = SDL_PIXELFORMAT_RGB565,
-            [3] = SDL_PIXELFORMAT_BGR565
+            [4] = SDL_PIXELFORMAT_RGB565,
+            [5] = SDL_PIXELFORMAT_BGR565
         },
         .max_texture_width = 1024,
         .max_texture_height = 1024,
@@ -148,9 +148,7 @@ void
 StartDrawing(SDL_Renderer *renderer)
 {
     VITA_GXM_RenderData *data = (VITA_GXM_RenderData *) renderer->driverdata;
-    if(data->drawing)
-    {
-        SDL_LogError(SDL_LOG_CATEGORY_RENDER, "uh-oh, already drawing\n");
+    if (data->drawing) {
         return;
     }
 
@@ -993,9 +991,6 @@ VITA_GXM_RunCommandQueue(SDL_Renderer * renderer, SDL_RenderCommand *cmd, void *
         cmd = cmd->next;
     }
 
-    sceGxmEndScene(data->gxm_context, NULL, NULL);
-    data->drawing = SDL_FALSE;
-
     return 0;
 }
 
@@ -1090,6 +1085,13 @@ VITA_GXM_RenderPresent(SDL_Renderer *renderer)
 {
     VITA_GXM_RenderData *data = (VITA_GXM_RenderData *) renderer->driverdata;
     SceCommonDialogUpdateParam updateParam;
+
+    if (data->drawing) {
+        sceGxmEndScene(data->gxm_context, NULL, NULL);
+        if (data->displayData.wait_vblank) {
+            sceGxmFinish(data->gxm_context);
+        }
+    }
 
     data->displayData.address = data->displayBufferData[data->backBufferIndex];
 
