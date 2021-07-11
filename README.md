@@ -1,3 +1,6 @@
+# Note: sdl2 vita support was upstreamed. Vitasdk contains latest package. Use that.
+This repo kept for sdl1 support and historical purposes.
+
 # SDL/SDL2-vita
 
 This repo contains full source for vita SDL1 and SDL2 ports (vita-* branches).
